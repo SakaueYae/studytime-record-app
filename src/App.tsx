@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./utils/supabase";
+import { Form } from "./components/ui/Form/Form";
 
 function App() {
   const defaultValue = { title: "", time: 0 };
@@ -72,48 +73,8 @@ function App() {
 
   return (
     <>
-      <div>
-        <label>
-          学習内容
-          <input
-            name="study-content"
-            value={formValue.title}
-            onChange={(e) =>
-              setFormValue((prev) => ({ ...prev, title: e.target.value }))
-            }
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          学習時間
-          <input
-            type="number"
-            name="study-hour"
-            value={formValue.time}
-            min={0}
-            onChange={(e) =>
-              setFormValue((prev) => ({
-                ...prev,
-                time: Number(e.target.value),
-              }))
-            }
-          />
-          時間
-        </label>
-      </div>
-      <div>入力されている学習内容：{formValue.title}</div>
-      <div>入力されている学習時間：{formValue.time}</div>
-      <input
-        type="submit"
-        value="登録"
-        onClick={() => {
-          if (formValue.title === "" || formValue.time === 0) setIsError(true);
-          else {
-            handleRegister();
-          }
-        }}
-      />
+      <Form />
+
       {isError && <div>入力されていない項目があります</div>}
       {isLoading ? (
         <div>Loading...</div>
