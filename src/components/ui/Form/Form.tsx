@@ -1,13 +1,20 @@
 import { useForm, useWatch } from "react-hook-form";
-import { supabase } from "../../../utils/supabase";
 import { Alert } from "../Alert/Alert";
 
-type FormType = {
+export type FormType = {
   title: string;
   time: number;
 };
 
-export const Form = () => {
+type FormProps = {
+  createStudyRecord: (record: FormType) => Promise<boolean>;
+};
+
+export const Form = ({ createStudyRecord }: FormProps) => {
+  const defaultValue = {
+    title: "",
+    time: 0,
+  };
   const {
     register,
     handleSubmit,
@@ -15,24 +22,19 @@ export const Form = () => {
     reset,
     formState: { errors },
     control,
-  } = useForm();
+  } = useForm<FormType>({
+    defaultValues: defaultValue,
+  });
   const title = useWatch({ control, name: "title" });
   const time = useWatch({ control, name: "time" });
 
-  const handleRegister = async (value) => {
-    try {
-      const { data, error } = await supabase
-        .from("study-record")
-        .insert(value)
-        .select("*");
-      if (error) throw error;
-      reset();
-    } catch (e) {
+  const handleRegister = async (value: FormType) => {
+    const ok = await createStudyRecord(value);
+    if (ok) reset(defaultValue);
+    else
       setError("root.server", {
         type: "serverError",
-        message: e.message,
       });
-    }
   };
 
   return (
@@ -57,7 +59,7 @@ export const Form = () => {
               errors.time ? "border-red-600" : "border-blue-600"
             }`}
             type="number"
-            {...register("time", { required: true, min: 0 })}
+            {...register("time", { required: true, min: 1 })}
           />
           時間
         </label>
