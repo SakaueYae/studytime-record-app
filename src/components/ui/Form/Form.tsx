@@ -40,34 +40,40 @@ export const Form = ({ createStudyRecord }: FormProps) => {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <label className="text-base font-medium">
-          学習内容
-          <input
-            className={`border border-solid  rounded font-normal ml-2 ${
-              errors.title ? "border-red-600" : "border-blue-600"
-            }`}
-            {...register("title", { required: true })}
-          />
-        </label>
-        {errors.title && <Alert text="入力必須項目です。" />}
+        <div>
+          <label className="text-lg font-medium">
+            学習内容
+            <input
+              className={`border border-solid  rounded font-normal ml-2 ${
+                errors.title ? "border-red-600" : "border-blue-600"
+              }`}
+              {...register("title", { required: true })}
+            />
+          </label>
+          {errors.title && <Alert text="入力必須項目です。" />}
+        </div>
+        <div>
+          <label className="text-lg font-medium ">
+            学習時間
+            <input
+              className={`border border-solid  rounded font-normal ml-2 ${
+                errors.time ? "border-red-600" : "border-blue-600"
+              }`}
+              type="number"
+              {...register("time", { required: true, min: 1 })}
+            />
+            時間
+          </label>
+          {errors.time && <Alert text="入力必須項目です。" />}
+        </div>
       </div>
       <div>
-        <label className="text-base font-medium ">
-          学習時間
-          <input
-            className={`border border-solid  rounded font-normal ml-2 ${
-              errors.time ? "border-red-600" : "border-blue-600"
-            }`}
-            type="number"
-            {...register("time", { required: true, min: 1 })}
-          />
-          時間
-        </label>
-        {errors.time && <Alert text="入力必須項目です。" />}
+        <div>入力されている学習内容：{title}</div>
+        <div>入力されている学習時間：{time}</div>
       </div>
-      <div>入力されている学習内容：{title}</div>
-      <div>入力されている学習時間：{time}</div>
-      <button onClick={handleSubmit(handleRegister)}>登録</button>
+      <button className="bg-blue-400" onClick={handleSubmit(handleRegister)}>
+        登録
+      </button>
       {errors.root && <Alert text={errors.root.message} />}
     </div>
   );

@@ -30,14 +30,18 @@ export const StudyRecord = ({
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <div>
-        <p>完了した学習</p>
+        <p className="font-medium text-lg">完了した学習</p>
         {studyRecord.map((value) => (
-          <div key={value.id} className="flex gap-8">
-            <p>{value.title}</p>
-            <p>{value.time}h</p>
-            <button onClick={() => handleModal(value)}>削除</button>
+          <div key={value.id} className="flex gap-8 justify-between my-4">
+            <div>
+              <p>{value.title}</p>
+              <p>{value.time}h</p>
+            </div>
+            <button className="bg-blue-400" onClick={() => handleModal(value)}>
+              削除
+            </button>
           </div>
         ))}
       </div>
