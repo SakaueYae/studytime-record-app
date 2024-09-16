@@ -2,7 +2,7 @@ import { Form, FormType } from "../ui/Form/Form";
 import { StudyRecord, StudyRecordType } from "../ui/StudyRecord/StudyRecord";
 import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
-import { get, set } from "react-hook-form";
+import { Loading } from "../ui/Loading/Loading";
 
 export const Page = () => {
   const [studyRecord, setStudyRecord] = useState<StudyRecordType[]>([]);
@@ -11,8 +11,10 @@ export const Page = () => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
       await getStudyRecord();
-      setIsLoading(false);
     })();
   }, []);
 
@@ -62,11 +64,19 @@ export const Page = () => {
 
   return (
     <div className="w-screen h-screen p-3 flex flex-col items-center bg-blue-200">
-      <Form createStudyRecord={createStudyRecord} />
-      <StudyRecord
-        studyRecord={studyRecord}
-        deleteStudyRecord={deleteStudyRecord}
-      />
+      {isLoading ? (
+        <div className="w-full h-full flex justify-center items-center">
+          <Loading />
+        </div>
+      ) : (
+        <>
+          <Form createStudyRecord={createStudyRecord} />
+          <StudyRecord
+            studyRecord={studyRecord}
+            deleteStudyRecord={deleteStudyRecord}
+          />
+        </>
+      )}
     </div>
   );
 };
