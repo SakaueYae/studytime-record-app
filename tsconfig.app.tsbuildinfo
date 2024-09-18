@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/page/index.tsx","./src/components/ui/Alert/Alert.tsx","./src/components/ui/Form/Form.tsx","./src/components/ui/Loading/Loading.tsx","./src/components/ui/Modal/Modal.tsx","./src/components/ui/StudyRecord/StudyRecord.tsx","./src/utils/supabase.ts"],"version":"5.6.2"}
