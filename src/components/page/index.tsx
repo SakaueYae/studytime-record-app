@@ -3,6 +3,7 @@ import { StudyRecord, StudyRecordType } from "../ui/StudyRecord/StudyRecord";
 import { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
 import { Loading } from "../ui/Loading/Loading";
+import { Title } from "../ui/Title/Title";
 
 export const Page = () => {
   const [studyRecord, setStudyRecord] = useState<StudyRecordType[]>([]);
@@ -70,6 +71,7 @@ export const Page = () => {
         </div>
       ) : (
         <>
+          <Title />
           <Form createStudyRecord={createStudyRecord} />
           <StudyRecord
             studyRecord={studyRecord}

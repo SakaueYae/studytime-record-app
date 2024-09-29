@@ -3,10 +3,10 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { Test } from "./components/page/test";
+import { HelloWorld } from "../components/page/helloWorld";
 import "@testing-library/jest-dom";
 
 test("should render HeLLO WORLD", () => {
-  render(<Test />);
+  render(<HelloWorld />);
   expect(screen.getByText("Hello World!")).toBeInTheDocument();
 });
