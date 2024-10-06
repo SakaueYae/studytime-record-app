@@ -30,9 +30,9 @@ export const StudyRecord = ({
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 grow overflow-auto">
+      <p className="font-medium text-lg">完了した学習</p>
       <div>
-        <p className="font-medium text-lg">完了した学習</p>
         {studyRecord.map((value) => (
           <div key={value.id} className="flex gap-8 justify-between my-4">
             <div>

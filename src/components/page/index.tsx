@@ -70,14 +70,14 @@ export const Page = () => {
           <Loading />
         </div>
       ) : (
-        <>
+        <div className="flex flex-col items-center h-full">
           <Title />
           <Form createStudyRecord={createStudyRecord} />
           <StudyRecord
             studyRecord={studyRecord}
             deleteStudyRecord={deleteStudyRecord}
           />
-        </>
+        </div>
       )}
     </div>
   );
