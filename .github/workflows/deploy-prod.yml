@@ -10,15 +10,27 @@ env:
   VITE_SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
 jobs:
-  deploy_live_website:
+  run_tests_and_deploy_live_website:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # リポジトリのファイルを取ってくる
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # Nodeを使えるようにする
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run build
+      # npmパッケージのインストール
+      - name: Install npm packages
+        run: npm ci
+      # ビルド
+      - name: Build
+        run: npm run build
+      # テストの実行
+      - name: Run test
+        run: npm run test
+      # firebaseへデプロイ
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
